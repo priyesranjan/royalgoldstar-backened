@@ -1,0 +1,231 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Enums ───────────────────────────────────────────────────────────────────
+
+enum Role {
+  CUSTOMER
+  STAFF
+  ADMIN
+}
+
+enum GoldAdvanceStatus {
+  ACTIVE
+  CLOSED
+}
+
+enum TransactionType {
+  DEPOSIT
+  WITHDRAWAL
+  PROFIT
+  REFERRAL
+  STAFF_COMMISSION
+  GOLD_ADVANCE // Legacy mapping
+  DAILY_RETURN // Legacy mapping
+  REFERRAL_REWARD // Legacy mapping
+}
+
+enum WithdrawalSource {
+  BALANCE
+  GOLD_ADVANCE
+  PROFIT
+  REFERRAL
+}
+
+enum WithdrawalStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum AuditAction {
+  CUSTOMER_CREATED
+  GOLD_ADVANCE_DEPOSITED
+  GOLD_ADVANCE_WITHDRAWN
+  STAFF_ASSIGNED
+  STAFF_REASSIGNED
+  CUSTOMER_UPDATED
+  WITHDRAWAL_REQUEST_CREATED
+  WITHDRAWAL_APPROVED
+  WITHDRAWAL_REJECTED
+  STAFF_CREATED
+  REFERRAL_LINKED
+  PROFIT_DISTRIBUTED
+  WALLET_ADJUSTED
+}
+
+// ─── User ────────────────────────────────────────────────────────────────────
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  password     String
+  role         Role     @default(CUSTOMER)
+  
+  // Professional / Identity Details
+  contactNo    String?  @unique
+  mobile       String?  @unique // For legacy compatibility
+  aadharNo     String?
+  aadhar       String?  // For legacy compatibility
+  pan          String?
+  address      String?
+  photo        String?
+  gender       String?
+  dob          DateTime?
+  
+  initialGoldAdvanceAmount Decimal? @db.Decimal(15, 2)
+  
+  referredBy   String?
+  staffId      String?
+  
+  wallet        Wallet?
+  goldAdvances  GoldAdvance[]
+  transactions Transaction[]
+  withdrawals  WithdrawalRequest[]
+  
+  // Relations
+  referrer     User?    @relation("ReferrerRelation", fields: [referredBy], references: [id])
+  referrals    User[]   @relation("ReferrerRelation")
+  assignedStaff User?   @relation("StaffRelation", fields: [staffId], references: [id])
+  customers     User[]   @relation("StaffRelation")
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([staffId])
+  @@index([role])
+  @@index([email])
+}
+
+// ─── Wallet ──────────────────────────────────────────────────────────────────
+
+model Wallet {
+  id                     String  @id @default(cuid())
+  userId                 String  @unique
+  user                   User    @relation(fields: [userId], references: [id])
+  goldAdvanceAmount      Decimal @default(0) @db.Decimal(15, 2)
+  profitAmount           Decimal @default(0) @db.Decimal(15, 2)
+  referralAmount         Decimal @default(0) @db.Decimal(15, 2)
+  totalWithdrawable      Decimal @default(0) @db.Decimal(15, 2)
+  
+  // Legacy fields (optional migration path)
+  balance                Decimal @default(0) @db.Decimal(15, 2)
+  dailyReturnBalance     Decimal @default(0) @db.Decimal(15, 2)
+  referralBalance        Decimal @default(0) @db.Decimal(15, 2)
+  staffCommissionBalance Decimal @default(0) @db.Decimal(15, 2)
+}
+
+// ─── Gold Advance ─────────────────────────────────────────────────────────────
+
+model GoldAdvance {
+  id            String           @id @default(cuid())
+  userId        String
+  user          User             @relation(fields: [userId], references: [id])
+  advanceAmount Decimal          @db.Decimal(15, 2)
+  startDate     DateTime         @default(now())
+  status        GoldAdvanceStatus @default(ACTIVE)
+  
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+
+  @@index([userId])
+  @@index([status])
+}
+
+// ─── Transaction ─────────────────────────────────────────────────────────────
+
+model Transaction {
+  id          String          @id @default(cuid())
+  userId      String
+  user        User            @relation(fields: [userId], references: [id])
+  type        TransactionType
+  amount      Decimal         @db.Decimal(15, 2)
+  balanceAfter Decimal        @default(0) @db.Decimal(15, 2)
+  description String?
+  
+  createdAt   DateTime        @default(now())
+
+  @@index([userId])
+  @@index([type])
+  @@index([createdAt])
+}
+
+// ─── WithdrawalRequest ───────────────────────────────────────────────────────
+
+model WithdrawalRequest {
+  id        String           @id @default(cuid())
+  userId    String
+  user      User             @relation(fields: [userId], references: [id])
+  amount    Decimal          @db.Decimal(15, 2)
+  source    WithdrawalSource @default(PROFIT)
+  status    WithdrawalStatus @default(PENDING)
+  
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+
+  @@index([userId])
+  @@index([status])
+}
+
+// ─── AuditLog ───────────────────────────────────────────────────────────────
+
+model AuditLog {
+  id                String   @id @default(cuid())
+  actionType        AuditAction
+  entityType        String
+  entityId          String
+  performedByUserId String?
+  performedByRole   Role?
+  description       String?
+  previousData      Json?
+  newData           Json?
+  comment           String?
+  ipAddress         String?
+  createdAt         DateTime @default(now())
+}
+
+// ─── Referral ────────────────────────────────────────────────────────────────
+
+model Referral {
+  id             String @id @default(cuid())
+  referrerId     String
+  referredUserId String
+}
+
+// ─── StaffCommission ────────────────────────────────────────────────────────
+
+model StaffCommission {
+  id         String   @id @default(cuid())
+  staffId    String
+  customerId String
+  amount     Decimal  @db.Decimal(15, 2)
+  
+  createdAt  DateTime @default(now())
+
+  @@index([staffId])
+  @@index([customerId])
+}
+
+// ─── DailyProfitLog (System Log) ─────────────────────────────────────────────
+
+model DailyProfitLog {
+  id        String   @id @default(cuid())
+  date      String   @unique // Format: YYYY-MM-DD
+  status    String   // SUCCESS, FAILED
+  processed Int
+  createdAt DateTime @default(now())
+}
+
+model SystemSetting {
+  id            String  @id @default("default")
+  showGST       Boolean @default(true)
+  gstPercentage Decimal @default(18.0) @db.Decimal(5, 2)
+  updatedAt     DateTime @updatedAt
+}

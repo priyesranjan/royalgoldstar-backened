@@ -1,0 +1,168 @@
+﻿--- Checking Investments ---
+prisma:query SELECT `u687031041_rgt`.`Investment`.`id`, `u687031041_rgt`.`Investment`.`userId`, `u687031041_rgt`.`Investment`.`amount`, `u687031041_rgt`.`Investment`.`startDate`, `u687031041_rgt`.`Investment`.`status`, `u687031041_rgt`.`Investment`.`createdAt`, `u687031041_rgt`.`Investment`.`updatedAt` FROM `u687031041_rgt`.`Investment` WHERE 1=1 ORDER BY `u687031041_rgt`.`Investment`.`createdAt` DESC LIMIT ? OFFSET ?
+[
+  {
+    "id": "cmmrijjgm000x11bklx4aewcj",
+    "userId": "cmmri0y660007109wjgxp6zdm",
+    "amount": "50000",
+    "startDate": "2026-03-15T08:49:13.030Z",
+    "status": "ACTIVE",
+    "createdAt": "2026-03-15T08:49:13.030Z",
+    "updatedAt": "2026-03-15T08:49:13.030Z"
+  },
+  {
+    "id": "cmmridgz0000a11bk4qjdzxme",
+    "userId": "cmmri0y660007109wjgxp6zdm",
+    "amount": "1000",
+    "startDate": "2026-03-15T08:44:29.868Z",
+    "status": "ACTIVE",
+    "createdAt": "2026-03-15T08:44:29.868Z",
+    "updatedAt": "2026-03-15T08:44:29.868Z"
+  }
+]
+
+--- Checking Transactions ---
+prisma:query SELECT `u687031041_rgt`.`Transaction`.`id`, `u687031041_rgt`.`Transaction`.`userId`, `u687031041_rgt`.`Transaction`.`type`, `u687031041_rgt`.`Transaction`.`amount`, `u687031041_rgt`.`Transaction`.`balanceAfter`, `u687031041_rgt`.`Transaction`.`description`, `u687031041_rgt`.`Transaction`.`createdAt` FROM `u687031041_rgt`.`Transaction` WHERE 1=1 ORDER BY `u687031041_rgt`.`Transaction`.`createdAt` DESC LIMIT ? OFFSET ?
+[
+  {
+    "id": "cmmrixgsm000aw8ipkzi64q04",
+    "userId": "cmmri0xnb0003109wmvpjiff3",
+    "type": "STAFF_COMMISSION",
+    "amount": "85",
+    "balanceAfter": "0",
+    "description": "Staff commission (5% monthly rate) from customer Default Customer (ID: cmmri0y660007109wjgxp6zdm)",
+    "createdAt": "2026-03-15T09:00:02.758Z"
+  },
+  {
+    "id": "cmmrixfw80005w8ip3hfh7h0s",
+    "userId": "cmmri0y660007109wjgxp6zdm",
+    "type": "PROFIT",
+    "amount": "85",
+    "balanceAfter": "51256.67",
+    "description": "Daily profit (5% monthly rate) on total invested: Γé╣51000",
+    "createdAt": "2026-03-15T09:00:01.593Z"
+  },
+  {
+    "id": "cmmrir0nq001k11bkdbfmrgs4",
+    "userId": "cmmri0xnb0003109wmvpjiff3",
+    "type": "STAFF_COMMISSION",
+    "amount": "85",
+    "balanceAfter": "0",
+    "description": "Staff commission (5% monthly rate) from customer Default Customer (ID: cmmri0y660007109wjgxp6zdm)",
+    "createdAt": "2026-03-15T08:55:01.910Z"
+  },
+  {
+    "id": "cmmrir02s001f11bkqck2h1ov",
+    "userId": "cmmri0y660007109wjgxp6zdm",
+    "type": "PROFIT",
+    "amount": "85",
+    "balanceAfter": "51171.67",
+    "description": "Daily profit (5% monthly rate) on total invested: Γé╣51000",
+    "createdAt": "2026-03-15T08:55:01.157Z"
+  },
+  {
+    "id": "cmmrikl6c001811bkuimg06y4",
+    "userId": "cmmri0xnb0003109wmvpjiff3",
+    "type": "STAFF_COMMISSION",
+    "amount": "85",
+    "balanceAfter": "0",
+    "description": "Staff commission (5% monthly rate) from customer Default Customer (ID: cmmri0y660007109wjgxp6zdm)",
+    "createdAt": "2026-03-15T08:50:01.908Z"
+  },
+  {
+    "id": "cmmrikkk0001311bkpeliwxbp",
+    "userId": "cmmri0y660007109wjgxp6zdm",
+    "type": "PROFIT",
+    "amount": "85",
+    "balanceAfter": "51086.67",
+    "description": "Daily profit (5% monthly rate) on total invested: Γé╣51000",
+    "createdAt": "2026-03-15T08:50:01.104Z"
+  },
+  {
+    "id": "cmmrijj9p000v11bk2xyl4tvy",
+    "userId": "cmmri0y660007109wjgxp6zdm",
+    "type": "INVESTMENT",
+    "amount": "50000",
+    "balanceAfter": "1001.67",
+    "description": "Investment Processed: Staff recorded investment",
+    "createdAt": "2026-03-15T08:49:12.782Z"
+  },
+  {
+    "id": "cmmrijih0000s11bkegwgd9x8",
+    "userId": "cmmri0y660007109wjgxp6zdm",
+    "type": "INVESTMENT",
+    "amount": "50000",
+    "balanceAfter": "1001.67",
+    "description": "Manual Load: Staff recorded investment",
+    "createdAt": "2026-03-15T08:49:11.748Z"
+  },
+  {
+    "id": "cmmrie60l000l11bk2orvvt1y",
+    "userId": "cmmri0xnb0003109wmvpjiff3",
+    "type": "STAFF_COMMISSION",
+    "amount": "1.67",
+    "balanceAfter": "0",
+    "description": "Staff commission (5% monthly rate) from customer Default Customer (ID: cmmri0y660007109wjgxp6zdm)",
+    "createdAt": "2026-03-15T08:45:02.325Z"
+  },
+  {
+    "id": "cmmrie5dv000g11bkhg91rbp5",
+    "userId": "cmmri0y660007109wjgxp6zdm",
+    "type": "PROFIT",
+    "amount": "1.67",
+    "balanceAfter": "1001.67",
+    "description": "Daily profit (5% monthly rate) on total invested: Γé╣1000",
+    "createdAt": "2026-03-15T08:45:01.508Z"
+  },
+  {
+    "id": "cmmridgte000811bkpmzea3ak",
+    "userId": "cmmri0y660007109wjgxp6zdm",
+    "type": "INVESTMENT",
+    "amount": "1000",
+    "balanceAfter": "0",
+    "description": "Investment Processed: Staff recorded investment",
+    "createdAt": "2026-03-15T08:44:29.666Z"
+  },
+  {
+    "id": "cmmridg45000511bkx78tbtnp",
+    "userId": "cmmri0y660007109wjgxp6zdm",
+    "type": "INVESTMENT",
+    "amount": "1000",
+    "balanceAfter": "0",
+    "description": "Manual Load: Staff recorded investment",
+    "createdAt": "2026-03-15T08:44:28.757Z"
+  }
+]
+
+--- Checking Staff Commissions ---
+prisma:query SELECT `u687031041_rgt`.`StaffCommission`.`id`, `u687031041_rgt`.`StaffCommission`.`staffId`, `u687031041_rgt`.`StaffCommission`.`customerId`, `u687031041_rgt`.`StaffCommission`.`amount`, `u687031041_rgt`.`StaffCommission`.`createdAt` FROM `u687031041_rgt`.`StaffCommission` WHERE 1=1 ORDER BY `u687031041_rgt`.`StaffCommission`.`createdAt` DESC LIMIT ? OFFSET ?
+[
+  {
+    "id": "cmmrixgy7000bw8ip1vpbg7gb",
+    "staffId": "cmmri0xnb0003109wmvpjiff3",
+    "customerId": "cmmri0y660007109wjgxp6zdm",
+    "amount": "85",
+    "createdAt": "2026-03-15T09:00:02.959Z"
+  },
+  {
+    "id": "cmmrir0tt001l11bkm04e7ssc",
+    "staffId": "cmmri0xnb0003109wmvpjiff3",
+    "customerId": "cmmri0y660007109wjgxp6zdm",
+    "amount": "85",
+    "createdAt": "2026-03-15T08:55:02.129Z"
+  },
+  {
+    "id": "cmmriklca001911bkioyrb5fs",
+    "staffId": "cmmri0xnb0003109wmvpjiff3",
+    "customerId": "cmmri0y660007109wjgxp6zdm",
+    "amount": "85",
+    "createdAt": "2026-03-15T08:50:02.122Z"
+  },
+  {
+    "id": "cmmrie65x000m11bk3ma77248",
+    "staffId": "cmmri0xnb0003109wmvpjiff3",
+    "customerId": "cmmri0y660007109wjgxp6zdm",
+    "amount": "1.67",
+    "createdAt": "2026-03-15T08:45:02.517Z"
+  }
+]

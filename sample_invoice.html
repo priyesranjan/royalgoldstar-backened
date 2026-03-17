@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Invoice - cmmrvian500086vdup9kb2bkq</title>
+    <style>
+        @page { size: A4; margin: 10mm; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; color: #000; font-size: 11pt; line-height: 1.4; }
+        .invoice-box { max-width: 210mm; margin: auto; padding: 0; border: 1px solid #000; }
+        
+        /* Layout Sections */
+        .section { display: flex; border-bottom: 1px solid #000; }
+        .col { flex: 1; padding: 8px; }
+        .col-border { border-right: 1px solid #000; }
+        
+        /* Header */
+        .header { align-items: center; }
+        .logo-box { width: 60px; height: 60px; border: 2px solid #000; display: flex; align-items: center; justify-content: center; font-size: 40px; font-weight: bold; margin-right: 15px; }
+        .seller-info h1 { margin: 0; font-size: 22pt; letter-spacing: 1px; }
+        .seller-info p { margin: 2px 0; font-size: 9pt; }
+
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+        th, td { border: 1px solid #000; padding: 6px; text-align: left; overflow: hidden; }
+        th { background: #eee; font-weight: bold; font-size: 9pt; text-transform: uppercase; }
+        
+        .items-table th:nth-child(1) { width: 40px; }
+        .items-table th:nth-child(3) { width: 80px; }
+        .items-table th:nth-child(4) { width: 60px; }
+        .items-table th:nth-child(5) { width: 60px; }
+        
+        /* Totals */
+        .totals-section { display: flex; justify-content: space-between; border-bottom: 1px solid #000; }
+        .totals-left { flex: 2; padding: 8px; }
+        .totals-right { flex: 1; }
+        .totals-right table td { border: none; border-left: 1px solid #000; padding: 5px 8px; }
+        .totals-right table tr:last-child { border-top: 1px solid #000; font-weight: bold; font-size: 12pt; }
+
+        /* Footer */
+        .footer-cols { display: flex; min-height: 100px; }
+        .qr-placeholder { width: 100px; height: 100px; border: 1px solid #000; display: flex; align-items: center; justify-content: center; font-size: 8pt; text-align: center; }
+        
+        .bold { font-weight: bold; }
+        .center { text-align: center; }
+        .right { text-align: right; }
+        
+        @media print {
+            body { margin: 0; border: none; }
+            .invoice-box { border: 1px solid #000; width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="invoice-box">
+        <!-- HEADER -->
+        <div class="section header">
+            <div style="padding: 10px; display: flex; align-items: center;">
+                <div class="logo-box">#</div>
+                <div class="seller-info">
+                    <h1>AGARWAL AGENCIES</h1>
+                    <p>S P Verma Road Corner, Opp. Westside, Patna – 800 001, Bihar</p>
+                    <p><span class="bold">GSTIN:</span> 10AAHFA3196L1ZI | <span class="bold">Tel:</span> 9430002525</p>
+                    <p><span class="bold">Email:</span> agencies.agarwal@gmail.com</p>
+                </div>
+            </div>
+            <div style="flex-grow: 1; text-align: right; padding: 10px;">
+                <h2 style="margin: 0; color: #555;">TAX INVOICE</h2>
+            </div>
+        </div>
+
+        <!-- DETAILS -->
+        <div class="section">
+            <div class="col col-border">
+                <p><strong>Invoice No.:</strong> 2025-26/2BKQ</p>
+                <p><strong>Date:</strong> 15-03-2026</p>
+                <p><strong>Place of Supply:</strong> Bihar (10)</p>
+                <p><strong>Reverse Charge:</strong> N</p>
+            </div>
+            <div class="col">
+                <p><strong>Transport:</strong> NIL</p>
+                <p><strong>Station:</strong> Patna</p>
+                <p><strong>Vehicle No.:</strong> </p>
+                <p><strong>Order No.:</strong> </p>
+            </div>
+        </div>
+
+        <!-- PARTY DETAILS -->
+        <div class="section">
+            <div class="col col-border">
+                <p class="bold" style="text-decoration: underline; margin-bottom: 5px;">Billed To:</p>
+                <p class="bold">Royal Gold Traders</p>
+                <p style="font-size: 10pt;">C/O DR. PRIYARANJAN, B-19 Behind Lohiya Park, 2nd Floor, Pritichhaya, Road Number 1, Titan Eye Plus, Kankarbagh, Patna, Bihar – 800020</p>
+                <p><strong>State:</strong> Bihar (10)</p>
+                <p><strong>GSTIN/UIN:</strong> 10ADJPI8137N1ZE</p>
+            </div>
+            <div class="col">
+                <p class="bold" style="text-decoration: underline; margin-bottom: 5px;">Shipped To:</p>
+                <p class="bold">Royal Gold Traders</p>
+                <p style="font-size: 10pt;">C/O DR. PRIYARANJAN, B-19 Behind Lohiya Park, 2nd Floor, Pritichhaya, Road Number 1, Titan Eye Plus, Kankarbagh, Patna, Bihar – 800020</p>
+                <p><strong>State:</strong> Bihar (10)</p>
+            </div>
+        </div>
+
+        <!-- ITEMS TABLE -->
+        <table class="items-table">
+            <thead>
+                <tr>
+                    <th>S.N.</th>
+                    <th>Description of Goods</th>
+                    <th>HSN/SAC</th>
+                    <th>Qty.</th>
+                    <th>Unit</th>
+                    <th>Price</th>
+                    <th>Amount ₹</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="height: 300px; vertical-align: top;">
+                    <td class="center">1</td>
+                    <td>
+                        <p class="bold">Global – NotePro – GS8000V</p>
+                        <p style="font-size: 9pt; color: #444;">Gold Advance Reference: cmmrvian500086vdup9kb2bkq</p>
+                    </td>
+                    <td class="center">847290</td>
+                    <td class="right">1.00</td>
+                    <td class="center">Pcs.</td>
+                    <td class="right">76,270.34</td>
+                    <td class="right">76,270.34</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- TOTALS AREA -->
+        <div class="totals-section">
+            <div class="totals-left">
+                <p style="margin: 0;"><span class="bold">Amount in Words:</span> Rupees Eighty Nine Thousand Nine Hundred and Ninety Nine Only</p>
+            </div>
+            <div class="totals-right">
+                <table style="width: 100%; border: none;">
+                    <tr>
+                        <td>Subtotal</td>
+                        <td class="right">₹76,270.34</td>
+                    </tr>
+                    <tr>
+                        <td>CGST @ 9%</td>
+                        <td class="right">₹6,864.33</td>
+                    </tr>
+                    <tr>
+                        <td>SGST @ 9%</td>
+                        <td class="right">₹6,864.33</td>
+                    </tr>
+                    <tr style="border-top: 1.5px solid #000;">
+                        <td><span class="bold">Grand Total</span></td>
+                        <td class="right bold">₹89,999.00</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- TAX SUMMARY TABLE -->
+        <table style="margin-top: -1px;">
+            <thead>
+                <tr>
+                    <th>Tax Rate</th>
+                    <th>Taxable Amt.</th>
+                    <th>CGST Amt.</th>
+                    <th>SGST Amt.</th>
+                    <th>Total Tax</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="center">18%</td>
+                    <td class="right">76,270.34</td>
+                    <td class="right">6,864.33</td>
+                    <td class="right">6,864.33</td>
+                    <td class="right">13,728.66</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- FOOTER -->
+        <div class="footer-cols">
+            <div class="col col-border" style="flex: 1.5;">
+                <p class="bold" style="font-size: 9pt; text-decoration: underline;">Terms & Conditions:</p>
+                <ol style="font-size: 8pt; padding-left: 20px; margin: 0;">
+                    <li>Goods once sold will not be taken back.</li>
+                    <li>Interest @ 18% p.a. will be charged if payment is not made within stipulated time.</li>
+                    <li>Subject to 'Bihar' Jurisdiction only.</li>
+                </ol>
+                <div style="margin-top: 15px;">
+                    <div class="qr-placeholder">E-Invoice<br>QR Code</div>
+                </div>
+            </div>
+            <div class="col" style="display: flex; flex-direction: column; justify-content: space-between; align-items: center;">
+                <p style="margin-top: 40px; border-top: 1px solid #000; width: 80%; text-align: center; font-size: 9pt;">Receiver's Signature</p>
+                <div style="text-align: center;">
+                    <p style="margin: 0; font-size: 9pt;">For <span class="bold">AGARWAL AGENCIES</span></p>
+                    <p style="margin-top: 30px; font-weight: bold; font-size: 10pt;">Authorised Signatory</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="center" style="margin-top: 10px; font-size: 8pt; color: #666;">
+        This is a computer generated invoice.
+    </div>
+</body>
+</html>
+    
