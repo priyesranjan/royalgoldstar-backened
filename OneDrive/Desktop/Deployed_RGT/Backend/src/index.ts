@@ -21,16 +21,58 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 4000;
 
+const corsAllowlist = (process.env.CORS_ORIGINS || "")
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
+if (process.env.FRONTEND_URL?.trim()) {
+  corsAllowlist.push(process.env.FRONTEND_URL.trim());
+}
+
+corsAllowlist.push(
+  "https://royalgoldtraders.com",
+  "https://www.royalgoldtraders.com",
+  "http://localhost:3000",
+  "http://localhost:3001",
+  "http://127.0.0.1:3000",
+  "http://127.0.0.1:3001"
+);
+
+const isAllowedOrigin = (origin?: string): boolean => {
+  if (!origin) {
+    return true;
+  }
+
+  if (corsAllowlist.includes(origin)) {
+    return true;
+  }
+
+  try {
+    const url = new URL(origin);
+    const { hostname, protocol } = url;
+
+    if (protocol !== "https:" && hostname !== "localhost" && hostname !== "127.0.0.1") {
+      return false;
+    }
+
+    return hostname === "royalgoldtraders.com" || hostname.endsWith(".royalgoldtraders.com");
+  } catch {
+    return false;
+  }
+};
+
 // ── Middleware ────────────────────────────────────────────────────────────────
 app.use(cors({
-  origin: [
-    "https://royalgoldtraders.com",
-    "https://www.royalgoldtraders.com",
-    process.env.FRONTEND_URL || "http://localhost:3000",
-    "http://localhost:3001",
-    "http://127.0.0.1:3001",
-    "http://127.0.0.1:3000"
-  ],
+  origin: (origin, callback) => {
+    callback(null, isAllowedOrigin(origin));
+  },
+  credentials: true,
+}));
+app.options("*", cors({
+  origin: (origin, callback) => {
+    callback(null, isAllowedOrigin(origin));
+  },
   credentials: true,
 }));
 app.use(express.json());
